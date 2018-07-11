@@ -3,11 +3,11 @@ require_relative("../models/album")
 require_relative("../models/artist")
 
 
-artist1 = Artist.new('artist_name' => 'Oasis')
+artist1 = Artist.new('artist' => 'Oasis')
 artist1.save()
 
-
-
+artist2 = Artist.new('artist' => 'Oasis')
+artist2.save()
 
 
 

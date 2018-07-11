@@ -7,7 +7,7 @@ attr_reader :id, :artist
 
   def initialize(options)
     @id = options["id"].to_i if options["id"]
-    @name = options["artist"]
+    @artist = options["artist"]
   end
 
 def save()
