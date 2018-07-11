@@ -6,7 +6,7 @@ class Album
 attr_accessor :id, :title, :genre, :artist_id
 
   def initialize(options)
-    @id = options["id"]
+    @id = options["id"] if options["id"]
     @title = options["title"]
     @genre = options["genre"]
     @artist_id = options["artist_id"]
@@ -20,12 +20,35 @@ attr_accessor :id, :title, :genre, :artist_id
   end
 
   def self.all()
-    sql = "SELECT * FROM albums"
+    sql = "SELECT * FROM albums "
     albums = SqlRunner.run(sql)
     return albums.map { |album| Album.new(album) }
   end
 
-end #class end
+  def self.find(id)
+      sql = "SELECT * FROM albums WHERE id = $1"
+      values = [id]
+      album_hash = SqlRunner.run(sql, values)
+      album = Album.new(album_hash.first)
+      p album
+      return album
+    end
+
+    def update
+      sql = "UPDATE albums SET title = $1 WHERE id = $2"
+      values = [@title, @id]
+      SqlRunner.run(sql, values)
+    end
+
+
+
+    def delete()
+        sql = "DELETE FROM albums where id = $1"
+        values = [@id]
+        SqlRunner.run(sql, values)
+      end
+
+ end #class end
 
 
 

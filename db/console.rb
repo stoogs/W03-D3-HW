@@ -5,22 +5,29 @@ require_relative("../models/artist")
 
 artist1 = Artist.new('artist' => 'Oasis')
 artist1.save()
-
-artist2 = Artist.new('artist' => 'Oasis')
-artist2.save()
-
+#
+# artist2 = Artist.new('artist' => 'Oasis')
+# artist2.save()
+#
 album1 = Album.new('title' => 'Various Artists', 'genre' => 'Rock')
 album1.save()
-
+#
 p Album.all()
-p Artist.all()
+# p Artist.all()
+#
+# p Artist.find(30)
+# p Album.find(1)
+
 
 # :album_title, :genre, :artist_id
 
+artist1.artist = 'Showaqqqqqqqqddywaddy'
+artist1.update()
 
+artist1.delete()
 
-
-
+album1.title = 'hear yeee'
+album1.update()
 #test delete_all
 # Customer.delete_all()
 
