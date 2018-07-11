@@ -3,12 +3,20 @@ require_relative('../db/sql_runner')
 
 class Artist
 
-attr_accessor :id, :artist_name
+attr_reader :id, :artist
 
   def initialize(options)
     @id = options["id"].to_i if options["id"]
-    @artist_name = options["artist"]
+    @name = options["artist"]
   end
+
+def save()
+  sql = "INSERT INTO artists (artist) VALUES ($1) RETURNING id"
+  values = [@artist]
+  artists = SqlRunner.run(sql,values)
+  @id = artists[0]["id"].to_i
+end
+
 
 
 end #end class
