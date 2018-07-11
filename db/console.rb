@@ -9,10 +9,13 @@ artist1.save()
 artist2 = Artist.new('artist' => 'Oasis')
 artist2.save()
 
+album1 = Album.new('title' => 'Various Artists', 'genre' => 'Rock')
+album1.save()
 
+p Album.all()
+p Artist.all()
 
-
-
+# :album_title, :genre, :artist_id
 
 
 

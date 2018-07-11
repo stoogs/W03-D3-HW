@@ -3,16 +3,27 @@ require_relative("../db/sql_runner")
 
 class Album
 
-attr_accessor :id, :album_title, :genre, :artist_id
+attr_accessor :id, :title, :genre, :artist_id
 
   def initialize(options)
     @id = options["id"]
-    @album_title = options["title"]
+    @title = options["title"]
     @genre = options["genre"]
     @artist_id = options["artist_id"]
   end
 
+  def save()
+    sql = "INSERT INTO albums (title,genre,artist_id) VALUES ($1,$2,$3) RETURNING id"
+    values = [@title,@genre,@artist_id]
+    albums = SqlRunner.run(sql,values)
+    @id = albums[0]["id"].to_i
+  end
 
+  def self.all()
+    sql = "SELECT * FROM albums"
+    albums = SqlRunner.run(sql)
+    return albums.map { |album| Album.new(album) }
+  end
 
 end #class end
 
